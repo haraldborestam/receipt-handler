@@ -1,23 +1,44 @@
 package se.harald.receipt.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Receipt {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String company;
     private String total_amount;
     private String date;
     private String text_content;
     private String file_url;
+    private String user_id;
 
+    // Constructor (DEFAULT)
     public Receipt() {
     }
 
-    public Receipt(String company, String total_amount, String date, String text_content) {
-        this.company = company;
+    // Constructor (Used when doing text extraction via external API)
+    public Receipt(String total_amount, String company, String date, String text_content) {
         this.total_amount = total_amount;
+        this.company = company;
         this.date = date;
         this.text_content = text_content;
     }
 
     // Getters & Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getCompany() {
         return company;
     }
@@ -58,13 +79,11 @@ public class Receipt {
         this.file_url = file_url;
     }
 
-    @Override
-    public String toString() {
-        return "receipt{" +
-                "company='" + company + '\'' +
-                ", totalAmount='" + total_amount + '\'' +
-                ", date='" + date + '\'' +
-                ", textContent='" + text_content + '\'' +
-                '}';
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 }
