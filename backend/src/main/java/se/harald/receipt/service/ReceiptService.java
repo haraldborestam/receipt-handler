@@ -38,7 +38,6 @@ public class ReceiptService {
 
         // Comment: file extension is needed when calling the text extraction api
         String fileExtensionType = getFileExtensionType(file.getOriginalFilename());
-        System.out.println("fileExtensionType = " + fileExtensionType);
         // Comment: the image passed to the text extraction api has to be in base 64 format.
         String base64Image = convertFileToBase64(file);
 
