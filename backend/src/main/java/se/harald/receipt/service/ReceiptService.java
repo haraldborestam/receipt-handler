@@ -142,6 +142,7 @@ public class ReceiptService {
     public List<Receipt> getAllReceipts() {
         return repository.findAll();
     }
+
     public List<Receipt> getReceiptsByUserEmail(String userEmail) {
         return repository.findByPerson(userEmail);
     }
@@ -157,5 +158,17 @@ public class ReceiptService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void updateReceiptById(Long id, Receipt newReceipt) {
+        // 1: hitta kvittot
+        Receipt receiptFromDatabase = getReceiptById(id);
+        // 2: uppdatera fälten som är ändrade
+        receiptFromDatabase.setCompany(newReceipt.getCompany());
+        receiptFromDatabase.setDate(newReceipt.getDate());
+        receiptFromDatabase.setText_content(newReceipt.getText_content());
+        receiptFromDatabase.setTotal_amount(newReceipt.getTotal_amount());
+        // 3: spara kvittot
+        repository.save(receiptFromDatabase);
     }
 }

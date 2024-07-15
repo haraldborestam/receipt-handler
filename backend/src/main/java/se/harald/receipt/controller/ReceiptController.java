@@ -31,7 +31,6 @@ public class ReceiptController {
     @GetMapping("{id}")
     public Receipt getReceiptById(@PathVariable Long id) {
         // todo: when Authentication is implemented: use email from JWT token instead of this non protected way
-        System.out.println("id = " + id);
         return service.getReceiptById(id);
 
     }
@@ -45,6 +44,12 @@ public class ReceiptController {
         else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PatchMapping("{id}")
+    public ResponseEntity updateById(@PathVariable Long id, @RequestBody Receipt receipt) {
+        service.updateReceiptById(id, receipt);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/textextraction")
