@@ -1,0 +1,14 @@
+spring:
+    application:
+        name: receipt-handler
+    config:
+        import: optional:file:.env.local[.properties]
+    datasource:
+        url: ${DATABASE_URL}
+        username: ${DATABASE_USERNAME}
+        password: ${DATABASE_PASSWORD}
+image:
+    upload:
+        dir: ${FILE_DIRECTORY}
+keys:
+    openai: ${OPENAI_API_KEY}
