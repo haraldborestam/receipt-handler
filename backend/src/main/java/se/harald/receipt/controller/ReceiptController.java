@@ -8,6 +8,7 @@ import se.harald.receipt.service.ReceiptService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class ReceiptController {
