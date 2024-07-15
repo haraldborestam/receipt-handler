@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.multipart.MultipartFile;
 import se.harald.receipt.model.Receipt;
+import se.harald.receipt.repository.ReceiptRepository;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.util.UUID;
 public class ReceiptService {
 
     // Fields
+    private final ReceiptRepository repository;
     private final RestClient restClient;
     @Value("${keys.openai}")
     private String API_KEY;
@@ -27,7 +29,8 @@ public class ReceiptService {
     private String fileDirectory;
 
     // Constructor
-    public ReceiptService() {
+    public ReceiptService(ReceiptRepository repository) {
+        this.repository = repository;
         restClient = RestClient.builder()
                 .baseUrl("https://api.openai.com/v1/chat")
                 .build();
