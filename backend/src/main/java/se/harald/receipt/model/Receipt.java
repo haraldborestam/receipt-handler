@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity(name = "receipt")
 public class Receipt {
 
     @Id
@@ -16,7 +16,7 @@ public class Receipt {
     private String date;
     private String text_content;
     private String file_url;
-    private String user_id;
+    private String person;
 
     // Constructor (DEFAULT)
     public Receipt() {
@@ -79,11 +79,11 @@ public class Receipt {
         this.file_url = file_url;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getPerson() {
+        return person;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setPerson(String person) {
+        this.person = person;
     }
 }

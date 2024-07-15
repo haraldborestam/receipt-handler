@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -138,4 +139,23 @@ public class ReceiptService {
         return newReceipt;
     }
 
+    public List<Receipt> getAllReceipts() {
+        return repository.findAll();
+    }
+    public List<Receipt> getReceiptsByUserEmail(String userEmail) {
+        return repository.findByPerson(userEmail);
+    }
+
+    public Receipt getReceiptById(Long id) {
+        return repository.findById(id).orElseThrow();
+    }
+
+    public boolean deleteById(Long id) {
+        try {
+            repository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
