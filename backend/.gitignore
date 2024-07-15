@@ -32,4 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
+### Custom additions ###
 .env.local
+.env
+.data
