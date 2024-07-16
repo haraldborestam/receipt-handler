@@ -50,7 +50,7 @@ function ReceiptsList({ receipts, setReceipts }: Props) {
             <th>Company</th>
             <th className="text-right">Total</th>
             <th>Date</th>
-            <th className="text-center">Actions</th>
+            <th className="text-center"></th>
           </tr>
         </thead>
         <tbody>

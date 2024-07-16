@@ -33,19 +33,28 @@ function App() {
 
   return (
     <>
-      <Menu heading="P O P" />
-      <button
-        className="button-add"
-        onClick={() => setShowAddReceiptWindow(!showAddReceiptWindow)}
-      >
-        Add receipt
-      </button>
-      <ReceiptsList
-        personId={1}
-        receipts={receipts}
-        setReceipts={setReceipts}
-      />
-      {showAddReceiptWindow && <AddReceipt onAddReceipt={handleAddReceipt} />}
+      {/* <Menu heading="P O P" /> */}
+      <div className="mega-container">
+        <div className="first-container">
+          <button
+            className="button-add"
+            onClick={() => setShowAddReceiptWindow(!showAddReceiptWindow)}
+          >
+            Add receipt
+          </button>
+
+          <ReceiptsList
+            personId={1}
+            receipts={receipts}
+            setReceipts={setReceipts}
+          />
+        </div>
+        <div className="seconde-container">
+          {showAddReceiptWindow && (
+            <AddReceipt onAddReceipt={handleAddReceipt} />
+          )}
+        </div>
+      </div>
     </>
   );
 }
