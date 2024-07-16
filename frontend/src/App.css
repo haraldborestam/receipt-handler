@@ -124,6 +124,41 @@ td {
   padding: 2em;
 }
 
+.dropzone {
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.dropzone p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.dropzone:hover {
+  border-color: #000;
+}
+
+.image-preview img {
+  max-width: 100%;
+  height: auto;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading img {
+  height: 30px;
+  width: 30px;
+}
+
 form {
   display: grid;
   padding: 2em;
@@ -146,6 +181,10 @@ input {
 input:focus {
   border: 1px solid black;
   outline: 2px solid rgba(0, 0, 0, 1);
+}
+
+#text_input {
+  height: 5em;
 }
 
 .submit-button {

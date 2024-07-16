@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import { useDropzone } from "react-dropzone";
 import DeleteIcon from "/delete-icon.svg";
+import loadingGif from "/loading.gif";
 
 type ReceiptType = {
   id: number;
@@ -21,36 +23,56 @@ function AddReceipt({ onAddReceipt }: AddReceiptProps) {
   const [date, setDate] = useState("");
   const [text_content, setTextContent] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    if (acceptedFiles && acceptedFiles.length > 0) {
+      const selectedFile = acceptedFiles[0];
+      setFile(selectedFile);
+      setPreview(URL.createObjectURL(selectedFile));
+      handleImageUpload(selectedFile);
+    }
+  }, []);
 
-      const formData = new FormData();
-      formData.append("file", e.target.files[0]);
-
-      try {
-        const response = await fetch(
-          "http://localhost:8080/api/textextraction",
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const extractedText = await response.json();
-
-        setCompany(extractedText.company);
-        setAmount(extractedText.total_amount);
-        setDate(extractedText.date);
-        setTextContent(extractedText.text_content);
-      } catch (error) {
-        console.error("Error:", error);
+  useEffect(() => {
+    return () => {
+      if (preview) {
+        URL.revokeObjectURL(preview);
       }
+    };
+  }, [preview]);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: "image/*",
+  });
+
+  const handleImageUpload = async (file: File) => {
+    setIsLoading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("http://localhost:8080/api/textextraction", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const extractedText = await response.json();
+
+      setCompany(extractedText.company);
+      setAmount(extractedText.total_amount);
+      setDate(extractedText.date);
+      setTextContent(extractedText.text_content);
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -90,18 +112,27 @@ function AddReceipt({ onAddReceipt }: AddReceiptProps) {
         src={DeleteIcon}
         alt="X"
         className="delete_icon"
-        onClick={() => deleteReceipt(receipt.id)}
+        onClick={() => console.log("Delete action")}
       />
       <h1>Add receipt</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="image">Upload Image</label>
-        <input
-          type="file"
-          id="image"
-          name="image"
-          accept="image/*"
-          onChange={handleImageUpload}
-        />
+        <div {...getRootProps({ className: "dropzone" })}>
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p>Drop the image here...</p>
+          ) : isLoading ? (
+            <div className="loading">
+              <img src={loadingGif} alt="Uploading..." />
+              uploading file
+            </div>
+          ) : preview ? (
+            <div className="image-preview">
+              <img src={preview} alt="Image preview" />
+            </div>
+          ) : (
+            <p>Drag 'n' drop an image here, or click to select one</p>
+          )}
+        </div>
         <label htmlFor="company">Purchased from</label>
         <input
           type="text"
@@ -127,8 +158,7 @@ function AddReceipt({ onAddReceipt }: AddReceiptProps) {
           onChange={(e) => setDate(e.target.value)}
         />
         <label htmlFor="text_content">Text content</label>
-        <input
-          type="text"
+        <textarea
           id="text_input"
           name="text_input"
           value={text_content}
