@@ -60,12 +60,12 @@ function ReceiptsList({ receipts, setReceipts }: Props) {
               <td className="text-right">{receipt.total_amount}</td>
               <td>{receipt.date}</td>
               <td className="text-center">
-                <button
-                  className="delete-button"
+                <img
+                  src={DeleteIcon}
+                  alt="X"
+                  className="delete_icon"
                   onClick={() => deleteReceipt(receipt.id)}
-                >
-                  <img src={DeleteIcon} alt="X" className="delete_icon" />
-                </button>
+                />
               </td>
             </tr>
           ))}

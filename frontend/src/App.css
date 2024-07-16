@@ -1,20 +1,175 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
-.delete-button {
+/* Delete button */
+
+.delete_icon {
   background-color: white;
   border: none;
-  padding: 5px;
+  padding: 0px;
   margin: 0px;
 }
 
-.delete-button:hover {
-  background-color: brown;
+.delete_icon:hover {
+  background-color: rgb(255, 155, 155);
+  border-radius: 100%;
   border: none;
-  padding: 5px;
+  padding: 0px;
   margin: 0px;
+}
+
+/* Style from old index.css */
+
+body {
+  margin: 0;
+  padding: 0%;
+}
+
+h1 {
+  padding: 0px;
+  margin: 20px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+.active {
+  background-color: rgb(35, 38, 40);
+  color: rgb(232, 232, 234);
+}
+
+/* Style from old app.css */
+
+hr {
+  border-style: dashed;
+  margin: 20px;
+}
+
+header {
+  display: flex;
+}
+
+/* Table styling */
+
+.receipt-table {
+  border-collapse: collapse;
+  margin: 1em;
+}
+
+th {
+  border-bottom: 1px solid black;
+  text-align: left;
+  padding: 1em;
+}
+
+td {
+  text-align: left;
+  padding: 1em;
+}
+
+.receipt-table_row {
+  border-top: 1px solid rgb(255, 255, 255);
+}
+
+.receipt-table_row:hover {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+/* Text styling */
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-grey {
+  color: grey;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.padding-top-1em {
+  padding-top: 1em;
+}
+
+.margin-bottom-none {
+  margin-bottom: 0px;
+}
+
+/* Add new receipt window styling */
+
+.add-receipt-box {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+  border-radius: 1em;
+  width: 50%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0px 0px 67px 7px rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center accurately */
+  z-index: 1000; /* Ensure it's above other content */
+  padding: 2em;
+}
+
+form {
+  display: grid;
+  padding: 2em;
+  max-width: 400px;
+}
+
+label {
+  text-align: left;
+}
+
+input {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 2em;
+  padding: 0.2em;
+  margin: 0em 0em 1em;
+}
+
+input:focus {
+  border: 1px solid black;
+  outline: 2px solid rgba(0, 0, 0, 1);
+}
+
+.submit-button {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  height: 2.5em;
+  margin: 1em 0em 0em;
+}
+
+.submit-button:hover {
+  background-color: rgb(92, 92, 92);
+  color: white;
+}
+
+.button-add {
+  padding: 1em;
+  margin: 1em;
+  background-color: black;
+  color: white;
+  border: 0px;
+  border-radius: 1em;
+}
+
+.button-add:hover {
+  background-color: rgb(92, 92, 92);
 }

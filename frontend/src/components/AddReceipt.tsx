@@ -18,6 +18,9 @@ function AddReceipt({ onAddReceipt }: AddReceiptProps) {
   const [company, setCompany] = useState("7Eleven");
   const [total_amount, setAmount] = useState("1234");
   const [date, setDate] = useState("2024-12-31");
+  const [text_content, setTextContent] = useState(
+    "Propane and propane accessories"
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,7 +55,7 @@ function AddReceipt({ onAddReceipt }: AddReceiptProps) {
 
   return (
     <div className="add-receipt-box">
-      <h1 className="padding-top-1em margin-bottom-none">Add receipt</h1>
+      <h1>Add receipt</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="company">Purchased from</label>
         <input
@@ -77,6 +80,14 @@ function AddReceipt({ onAddReceipt }: AddReceiptProps) {
           name="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
+        />
+        <label htmlFor="text_content">Text content</label>
+        <input
+          type="text"
+          id="text_input"
+          name="text_input"
+          value={text_content}
+          onChange={(e) => setTextContent(e.target.value)}
         />
         <input
           type="submit"
