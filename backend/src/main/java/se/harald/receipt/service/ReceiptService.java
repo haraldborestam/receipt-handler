@@ -39,6 +39,7 @@ public class ReceiptService {
 
     // Methods
     public Receipt textExtraction(MultipartFile file) {
+        System.out.println("\n\tCALL TO TEXT EXTRACTION API MADE\n");
 
         // Comment: file extension is needed when calling the text extraction api
         String fileExtensionType = getFileExtensionType(file.getOriginalFilename());
@@ -135,6 +136,7 @@ public class ReceiptService {
         }
         // 3: Spara kvittot
         // todo: kalla på repository och spara kvittot med alla nödvändiga fält.
+        repository.save(newReceipt);
 
         return newReceipt;
     }

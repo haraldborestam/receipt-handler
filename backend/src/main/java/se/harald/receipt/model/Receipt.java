@@ -1,9 +1,6 @@
 package se.harald.receipt.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity(name = "receipt")
 public class Receipt {
@@ -14,6 +11,7 @@ public class Receipt {
     private String company;
     private String total_amount;
     private String date;
+    @Column(columnDefinition = "TEXT")
     private String text_content;
     private String file_url;
     private String person;
@@ -23,11 +21,12 @@ public class Receipt {
     }
 
     // Constructor (Used when doing text extraction via external API)
-    public Receipt(String total_amount, String company, String date, String text_content) {
+    public Receipt(String total_amount, String company, String date, String text_content, String person) {
         this.total_amount = total_amount;
         this.company = company;
         this.date = date;
         this.text_content = text_content;
+        this.person = person;
     }
 
     // Getters & Setters
