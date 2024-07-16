@@ -55,6 +55,8 @@ function ReceiptsList({ receipts, setReceipts }: Props) {
         </thead>
         <tbody>
           {receipts.map((receipt) => (
+            // kan vi skicka en funktion till den här komponenten och koppla den till en onClick-event?
+            // då kanske parent-komponent kan rendera Receipt-komponenten
             <tr key={receipt.id} className="receipt-table_row">
               <td>{receipt.company}</td>
               <td className="text-right">{receipt.total_amount}</td>

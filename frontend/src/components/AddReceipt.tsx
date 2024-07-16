@@ -15,9 +15,10 @@ type ReceiptType = {
 
 type AddReceiptProps = {
   onAddReceipt: (newReceipt: ReceiptType) => void;
+  hideWindow: () => void;
 };
 
-function AddReceipt({ onAddReceipt }: AddReceiptProps) {
+function AddReceipt({ onAddReceipt, hideWindow }: AddReceiptProps) {
   const [company, setCompany] = useState("");
   const [total_amount, setAmount] = useState("");
   const [date, setDate] = useState("");
@@ -107,12 +108,12 @@ function AddReceipt({ onAddReceipt }: AddReceiptProps) {
   };
 
   return (
-    <div className="add-receipt-box">
+    <div className="add-receipt-box position-relative">
       <img
         src={DeleteIcon}
         alt="X"
-        className="delete_icon"
-        onClick={() => console.log("Delete action")}
+        className="delete_icon upper-left-corner"
+        onClick={() => hideWindow()}
       />
       <h1>Add receipt</h1>
       <form onSubmit={handleSubmit}>

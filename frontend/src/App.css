@@ -108,13 +108,24 @@ td {
   margin-bottom: 0px;
 }
 
-/* Add new receipt window styling */
 /* prova att lägga tabellen och add-receipt-rutan bredvid varandra i en grid 1fr 1fr  */
 
 .mega-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+/* Styling for viewing a single receipt */
+
+.view-receipt-box {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+  border-radius: 1em;
+  text-align: center;
+  padding: 2em;
+}
+
+/* Styling for window to add new receipt */
 
 .add-receipt-box {
   background-color: rgb(255, 255, 255);
@@ -210,4 +221,16 @@ input:focus {
 
 .button-add:hover {
   background-color: rgb(92, 92, 92);
+}
+
+/* Styling för x-knapp vilket stänger ett window */
+
+.upper-left-corner {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.position-relative {
+  position: relative;
 }
