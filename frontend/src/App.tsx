@@ -45,6 +45,18 @@ function App() {
     setShowAddReceiptWindow(false);
   };
   // -------------------------------------------------------------------------------------
+  // Funktion som ser till att ViewReceipt-fönstret visas med korrekt kvitto.
+  // Skickas till ReceiptList-komponenten som en Prop så funktionen kan kopplas till en
+  // onClick händelse för varje rad i tabellen.
+  const handleViewReceipt = (receipt: ReceiptType) => {
+    // 1: sätt aktuellt kvitto
+    setReceiptToBeViewed(receipt);
+    // 2: sätt visibility till true
+    setShowViewReceiptWindow(true);
+    // 3: dölj AddReceipt-komponenten
+    setShowAddReceiptWindow(false);
+  };
+  // -------------------------------------------------------------------------------------
   // Funktion för att dölja ViewReceipt-komponenten.
   // Skickas till ViewReceipt-komponenten som en Prop så att den kan skapa en stäng-knapp.
   const hideViewReceiptWindow = () => {
@@ -64,20 +76,12 @@ function App() {
           >
             Add receipt
           </button>
-          <button
-            className="button-add"
-            onClick={() => {
-              setShowViewReceiptWindow(!showViewReceiptWindow);
-              setShowAddReceiptWindow(false);
-            }}
-          >
-            ViewReceipt
-          </button>
 
           <ReceiptsList
             personId={1}
             receipts={receipts}
             setReceipts={setReceipts}
+            handleViewReceipt={handleViewReceipt}
           />
         </div>
         <div className="second-container">
@@ -89,7 +93,7 @@ function App() {
           )}
           {showViewReceiptWindow && (
             <ViewReceipt
-              receipt={receipts[1]}
+              receipt={receiptToBeViewed}
               hideWindow={hideViewReceiptWindow}
             />
           )}

@@ -108,7 +108,7 @@ function AddReceipt({ onAddReceipt, hideWindow }: AddReceiptProps) {
   };
 
   return (
-    <div className="add-receipt-box position-relative">
+    <div className="add-receipt-box position-relative margin-top-100px margin-left-1em">
       <img
         src={DeleteIcon}
         alt="X"

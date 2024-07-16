@@ -15,9 +15,10 @@ type Props = {
   personId: number;
   receipts: ReceiptType[];
   setReceipts: React.Dispatch<React.SetStateAction<ReceiptType[]>>;
+  handleViewReceipt: (receipt: ReceiptType) => void;
 };
 
-function ReceiptsList({ receipts, setReceipts }: Props) {
+function ReceiptsList({ receipts, setReceipts, handleViewReceipt }: Props) {
   const [error, setError] = useState<Error | null>(null);
 
   //http://localhost:8080
@@ -42,6 +43,14 @@ function ReceiptsList({ receipts, setReceipts }: Props) {
     return <div>Error: {error.message}</div>;
   }
 
+  // Den här funktionen kommer dels öppna ViewReceipt-fönstret och dels sätta det kvitto vi vill kolla på
+  const openReceiptWindow = (id: number) => {
+    console.log("now the ViewReceipt should show up");
+    console.log(receipts.find((receipt) => receipt.id === id));
+    // 1: sätt aktuellt kvitto
+    // 2: turn on visibility för ViewReceipt-state
+  };
+
   return (
     <div>
       <table className="receipt-table">
@@ -57,7 +66,11 @@ function ReceiptsList({ receipts, setReceipts }: Props) {
           {receipts.map((receipt) => (
             // kan vi skicka en funktion till den här komponenten och koppla den till en onClick-event?
             // då kanske parent-komponent kan rendera Receipt-komponenten
-            <tr key={receipt.id} className="receipt-table_row">
+            <tr
+              onClick={() => handleViewReceipt(receipt)}
+              key={receipt.id}
+              className="receipt-table_row"
+            >
               <td>{receipt.company}</td>
               <td className="text-right">{receipt.total_amount}</td>
               <td>{receipt.date}</td>

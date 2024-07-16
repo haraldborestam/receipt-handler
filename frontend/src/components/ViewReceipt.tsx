@@ -13,16 +13,20 @@ type Props = {
 function ViewReceipt({ receipt, hideWindow }: Props) {
   return (
     <>
-      <div className="view-receipt-box position-relative">
+      <div className="view-receipt-box position-relative margin-top-100px margin-left-1em">
         <img
           src={DeleteIcon}
           alt="X"
           className="delete_icon upper-left-corner"
           onClick={() => hideWindow()}
         />
-        {receipt.total_amount || "hello"}
-        {receipt.date}
-        {receipt.text_content}
+        Company: {receipt.company}
+        <br></br>
+        Amount: {receipt.total_amount}
+        <br></br>
+        Date: {receipt.date}
+        <br></br>
+        Text content: {receipt.text_content}
       </div>
     </>
   );
