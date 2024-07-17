@@ -26,7 +26,10 @@ function App() {
   useEffect(() => {
     fetch(`http://localhost:8080/api/receipt`)
       .then((response) => response.json())
-      .then((data) => setReceipts(data))
+      .then((data) => {
+        setReceipts(data);
+        setSearchResultReceipts(data);
+      })
       .catch((error) => console.error("Error fetching receipts:", error));
   }, []);
   // -------------------------------------------------------------------------------------
@@ -63,10 +66,38 @@ function App() {
     setShowViewReceiptWindow(false);
   };
   // -------------------------------------------------------------------------------------
+  // Här ska vi skapa filter för att filtrera receipt-arrayen för sökning
+  const [query, setQuery] = useState("");
+  const [searchResultReceipts, setSearchResultReceipts] =
+    useState<ReceiptType[]>(receipts);
+
+  function searchFunc(e) {
+    e.preventDefault();
+    setSearchResultReceipts(
+      receipts.filter(
+        (receipt) =>
+          receipt.text_content.includes(query) ||
+          receipt.company.includes(query) ||
+          receipt.date.includes(query) ||
+          receipt.total_amount.includes(query)
+      )
+    );
+    console.log(searchResultReceipts);
+  }
+  // -------------------------------------------------------------------------------------
   return (
     <>
       <div className="mega-container">
         <div className="first-container">
+          <form onSubmit={searchFunc}>
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search..."
+            />
+            <button type="submit">Search</button>
+          </form>
           <button
             className="button-add"
             onClick={() => {
@@ -79,7 +110,7 @@ function App() {
 
           <ReceiptsList
             personId={1}
-            receipts={receipts}
+            receipts={searchResultReceipts}
             setReceipts={setReceipts}
             handleViewReceipt={handleViewReceipt}
           />

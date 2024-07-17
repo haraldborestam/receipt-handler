@@ -20,6 +20,14 @@ function ViewReceipt({ receipt, hideWindow }: Props) {
           className="delete_icon upper-left-corner"
           onClick={() => hideWindow()}
         />
+        <div className="view-receipt_image">
+          <div className="image-preview">
+            <img
+              src={"http://localhost:8080/" + receipt.file_url}
+              alt="image of receipt goes here"
+            />
+          </div>
+        </div>
         Company: {receipt.company}
         <br></br>
         Amount: {receipt.total_amount}

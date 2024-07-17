@@ -115,7 +115,6 @@ function AddReceipt({ onAddReceipt, hideWindow }: AddReceiptProps) {
         className="delete_icon upper-left-corner"
         onClick={() => hideWindow()}
       />
-      <h1>Add receipt</h1>
       <form onSubmit={handleSubmit}>
         <div {...getRootProps({ className: "dropzone" })}>
           <input {...getInputProps()} />

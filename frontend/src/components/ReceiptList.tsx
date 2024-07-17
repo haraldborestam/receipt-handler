@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DeleteIcon from "/delete-icon.svg";
+import BinIcon from "/bin-icon.svg";
 
 type ReceiptType = {
   id: number;
@@ -20,8 +20,8 @@ type Props = {
 
 function ReceiptsList({ receipts, setReceipts, handleViewReceipt }: Props) {
   const [error, setError] = useState<Error | null>(null);
+  const [activeReceipt, setActiveReceipt] = useState();
 
-  //http://localhost:8080
   const deleteReceipt = (id: number) => {
     fetch(`http://localhost:8080/api/${id}`, {
       method: "DELETE",
@@ -43,14 +43,6 @@ function ReceiptsList({ receipts, setReceipts, handleViewReceipt }: Props) {
     return <div>Error: {error.message}</div>;
   }
 
-  // Den här funktionen kommer dels öppna ViewReceipt-fönstret och dels sätta det kvitto vi vill kolla på
-  const openReceiptWindow = (id: number) => {
-    console.log("now the ViewReceipt should show up");
-    console.log(receipts.find((receipt) => receipt.id === id));
-    // 1: sätt aktuellt kvitto
-    // 2: turn on visibility för ViewReceipt-state
-  };
-
   return (
     <div>
       <table className="receipt-table">
@@ -64,8 +56,6 @@ function ReceiptsList({ receipts, setReceipts, handleViewReceipt }: Props) {
         </thead>
         <tbody>
           {receipts.map((receipt) => (
-            // kan vi skicka en funktion till den här komponenten och koppla den till en onClick-event?
-            // då kanske parent-komponent kan rendera Receipt-komponenten
             <tr
               onClick={() => handleViewReceipt(receipt)}
               key={receipt.id}
@@ -76,9 +66,9 @@ function ReceiptsList({ receipts, setReceipts, handleViewReceipt }: Props) {
               <td>{receipt.date}</td>
               <td className="text-center">
                 <img
-                  src={DeleteIcon}
+                  src={BinIcon}
                   alt="X"
-                  className="delete_icon"
+                  className="bin_icon"
                   onClick={() => deleteReceipt(receipt.id)}
                 />
               </td>
