@@ -45,6 +45,8 @@ public class ReceiptService {
         // Comment: the image passed to the text extraction api has to be in base 64 format.
         String base64Image = convertFileToBase64(file);
 
+        String prompt = "Extrahera texten i kvittot till följande key-value pairs: company, total_amount, date, text_content .Observera att ditt respons måste vara i json-format utan något extra. Alla fält ska vara av datatypen String. Om bilden inte är på ett kvitto lämna fälten tomma.";
+
         String jsonString = "{" +
                 "\"model\": \"gpt-4o\"," +
                 "\"messages\": [" +
@@ -53,7 +55,7 @@ public class ReceiptService {
                 "\"content\": [" +
                 "{" +
                 "\"type\": \"text\"," +
-                "\"text\": \"Extrahera texten i kvittot till följande key-value pairs: company, total_amount, date, text_content .Observera att ditt respons måste vara i json-format utan något extra. Alla fält ska vara av datatypen String. Om bilden inte är på ett kvitto lämna fälten tomma.\"" +
+                "\"text\": \""+ prompt + "\"" +
                 "}," +
                 "{" +
                 "\"type\": \"image_url\"," +
@@ -64,7 +66,7 @@ public class ReceiptService {
                 "]" +
                 "}" +
                 "]," +
-                "\"max_tokens\": 300" +
+                "\"max_tokens\": 1000" +
                 "}";
 
         try {
@@ -75,6 +77,8 @@ public class ReceiptService {
                     .body(jsonString)
                     .retrieve()
                     .body(String.class);
+
+            System.out.println("response = " + response);
 
             // Parse JSON to object
             ObjectMapper objectMapper = new ObjectMapper();
@@ -87,6 +91,9 @@ public class ReceiptService {
                 contentString = contentString.substring(7, contentString.length() - 3);
             }
 
+            // Städa upp responsen. Det händer att den innehåller olagliga tecken
+            contentString = sanitizeJsonString(contentString);
+
             // Map the contentString to Receipt class
             return objectMapper.readValue(contentString, Receipt.class);
 
@@ -94,6 +101,10 @@ public class ReceiptService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private String sanitizeJsonString(String jsonString) {
+        return jsonString.replaceAll("[\\x00-\\x1F]", "");
     }
 
     public String getFileExtensionType(String fileName) {

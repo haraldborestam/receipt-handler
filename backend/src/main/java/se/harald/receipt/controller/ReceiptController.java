@@ -65,8 +65,8 @@ public class ReceiptController {
         // Comment: this method only extracts text from the image and maps it to an object
         // It does not save the file to the server nor to the database.
         // todo: returnera ett ResponseEntity med Receipt-objektet och status 200 OK.
-        //return service.textExtraction(file);
-        return new Receipt("1919", "Bauhaus", "2023-08-19", "Gamla Nynäsvägen 600S-142 51 SkogåsTlf. 020-120 20 30www.bauhaus.seORG.NR: 969630-6944VEDKLYV HL 650 0 2.295,00* DEKORT 495,00TOTAL 1.800,00Bankkort 1.800,00Moms% 25%Moms 360,00Brutto 1.800,00Ni blev betjänad av: 4232209 10 140 14 10 18 15:50För mer information: Privatkunder - 60 dagars öppet köpPremiumkunder - 90 dagars öppet köp", "hardcoded.user@jwt.com");
+        return service.textExtraction(file);
+        //return new Receipt("1919", "Bauhaus", "2023-08-19", "Gamla Nynäsvägen 600S-142 51 SkogåsTlf. 020-120 20 30www.bauhaus.seORG.NR: 969630-6944VEDKLYV HL 650 0 2.295,00* DEKORT 495,00TOTAL 1.800,00Bankkort 1.800,00Moms% 25%Moms 360,00Brutto 1.800,00Ni blev betjänad av: 4232209 10 140 14 10 18 15:50För mer information: Privatkunder - 60 dagars öppet köpPremiumkunder - 90 dagars öppet köp", "hardcoded.user@jwt.com");
     }
 
     @PostMapping("/create")
