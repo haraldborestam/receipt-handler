@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 import se.harald.receipt.model.Receipt;
 import se.harald.receipt.repository.ReceiptRepository;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -128,14 +127,12 @@ public class ReceiptService {
         newReceipt.setFile_url(fileName);
         // 2: Spara filen
         try {
-            // path will look something like this: src/main/static/f97f[...]04fb.png
-            Path path = Paths.get(fileDirectory + File.separator + newReceipt.getFile_url());
+            Path path = Paths.get(fileDirectory + newReceipt.getFile_url());
             Files.write(path, file.getBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         // 3: Spara kvittot
-        // todo: kalla på repository och spara kvittot med alla nödvändiga fält.
         repository.save(newReceipt);
 
         return newReceipt;

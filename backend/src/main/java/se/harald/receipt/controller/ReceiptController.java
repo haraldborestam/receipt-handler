@@ -1,11 +1,18 @@
 package se.harald.receipt.controller;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import se.harald.receipt.model.Receipt;
 import se.harald.receipt.service.ReceiptService;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @CrossOrigin
@@ -78,6 +85,20 @@ public class ReceiptController {
 
         // todo: skicka tillbaka ett ResponseEntity med 201 CREATED
         return service.createReceipt(file, newReceipt);
+    }
+
+    @GetMapping("/file/{fileName}")
+    public ResponseEntity<byte[]> serveFile(@PathVariable String fileName) {
+        Path filePath = Paths.get("app_data/images/" + fileName);
+        try {
+            byte[] imageData = Files.readAllBytes(filePath);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG); // Ought to be adjusted for different file formats but seems to be working...
+            return new ResponseEntity<>(imageData, headers, HttpStatus.OK);
+        } catch (IOException e) {
+            // Handle file not found or other IO exceptions
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
