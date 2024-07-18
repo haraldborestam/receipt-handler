@@ -9,12 +9,15 @@ body {
 
 /* Delete button */
 
-.bin-icon {
-  background-color: rgb(229, 229, 229);
+.bin_icon {
   border-radius: 100%;
   border: none;
-  padding: 0px;
+  padding: 5px;
   margin: 0px;
+}
+
+.bin_icon:hover {
+  background-color: rgb(214, 99, 99);
 }
 
 .delete_icon {
@@ -35,20 +38,15 @@ body {
 
 /* Style from old index.css */
 
-body {
-  margin: 0;
-  padding: 0%;
-}
-
 h1 {
   padding: 0px;
-  margin: 20px;
+  margin: 0px;
 }
 
-main {
+/* main {
   display: flex;
   flex-direction: column;
-}
+} */
 
 .active {
   background-color: rgb(240, 240, 240);
@@ -56,22 +54,10 @@ main {
   border-radius: 1em;
 }
 
-/* Style from old app.css */
-
-hr {
-  border-style: dashed;
-  margin: 20px;
-}
-
-header {
-  display: flex;
-}
-
 /* Table styling */
 
 .receipt-table {
   border-collapse: collapse;
-  margin: 1em;
   width: 100%;
 }
 
@@ -156,7 +142,7 @@ td {
   padding: 20px;
   text-align: center;
   margin-bottom: 20px;
-  cursor: pointer;
+  /*   cursor: pointer; */
 }
 
 /* Styling for window to add new receipt */
@@ -218,11 +204,12 @@ label {
 
 input {
   background-color: rgb(255, 255, 255);
+  padding: 0.2em;
   border: 1px solid black;
   border-radius: 5px;
   height: 2em;
-  padding: 0.2em;
-  margin: 0em 0em 1em;
+  box-sizing: border-box;
+  font: inherit;
 }
 
 input:focus {
@@ -247,12 +234,10 @@ input:focus {
 }
 
 .button-add {
-  padding: 1em;
-  margin: 1em;
   background-color: black;
   color: white;
   border: 0px;
-  border-radius: 1em;
+  border-radius: 2em;
 }
 
 .button-add:hover {
@@ -273,12 +258,15 @@ input:focus {
 
 /* Styling för sökruta */
 
+.search-form {
+  padding: 1em;
+}
+
 .search-bar {
-  margin: 0px;
   border: none;
   border-radius: 1.5em;
   padding: 0.7em 1em;
-  width: 90%;
+  width: 100%;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
     rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 }
@@ -289,4 +277,32 @@ input:focus {
 
 .second-container {
   padding: 0em 5em 5em;
+}
+
+/* hr {
+  border-style: dashed;
+  margin: 20px;
+} */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 5em 3em;
+}
+
+.header-left {
+  display: flex;
+}
+
+.user-icon {
+  background-color: rgb(231, 231, 231);
+  padding: 1em;
+  border-radius: 3em;
+}
+
+.user-icon:hover {
+  background-color: rgb(196, 196, 196);
+  padding: 1em;
+  border-radius: 3em;
+  cursor: pointer;
 }

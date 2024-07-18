@@ -9,7 +9,7 @@ type Props = {
 function ViewReceipt({ receipt, hideWindow }: Props) {
   return (
     <>
-      <div className="view-receipt-box position-relative margin-top-100px margin-left-1em">
+      <div className="view-receipt-box position-relative">
         <img
           src={DeleteIcon}
           alt="X"

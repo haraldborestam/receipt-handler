@@ -63,7 +63,7 @@ function ReceiptsList({
             <th>Date</th>
             <th className="text-center">
               <button className="button-add" onClick={() => addReceipt()}>
-                Add receipt
+                Add
               </button>
             </th>
           </tr>

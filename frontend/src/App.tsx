@@ -3,6 +3,7 @@ import "./App.css";
 import AddReceipt from "./components/AddReceipt";
 import ReceiptsList from "./components/ReceiptList";
 import ViewReceipt from "./components/ViewReceipt";
+import Menu from "./components/Menu";
 
 type ReceiptType = {
   id: number;
@@ -108,25 +109,16 @@ function App() {
 
   return (
     <>
+      <Menu />
       <div className="mega-container">
         <div className="first-container">
-          <button
-            className="button-add"
-            onClick={() => {
-              setShowAddReceiptWindow(!showAddReceiptWindow);
-              setShowViewReceiptWindow(false);
-              setActiveReceipt(-1);
-            }}
-          >
-            Add receipt
-          </button>
-          <form onSubmit={searchFunc}>
+          <form className="search-form" onSubmit={searchFunc}>
             <input
               className="search-bar"
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search..."
+              placeholder="Search for receipt..."
             />
           </form>
           <ReceiptsList
