@@ -83,7 +83,10 @@ function ReceiptsList({
                   src={BinIcon}
                   alt="X"
                   className="bin_icon"
-                  onClick={() => deleteReceipt(receipt.id)}
+                  onClick={(e) => {
+                    deleteReceipt(receipt.id);
+                    e.stopPropagation();
+                  }}
                 />
               </td>
             </tr>
