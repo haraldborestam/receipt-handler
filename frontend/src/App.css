@@ -18,6 +18,7 @@ body {
 
 .bin_icon:hover {
   background-color: rgb(214, 99, 99);
+  cursor: pointer;
 }
 
 .delete_icon {
@@ -79,6 +80,7 @@ td {
 .receipt-table_row:hover {
   border-top: 1px solid black;
   border-bottom: 1px solid black;
+  cursor: context-menu;
 }
 
 /* Text styling */
@@ -110,6 +112,10 @@ td {
 
 .margin-left-1em {
   margin-left: 1em;
+}
+
+.margin-left-3em {
+  margin-left: 3em;
 }
 
 .margin-bottom-none {
@@ -162,7 +168,6 @@ td {
   border-radius: 5px;
   padding: 20px;
   text-align: center;
-  margin-bottom: 20px;
   cursor: pointer;
 }
 
@@ -200,48 +205,69 @@ td {
 
 label {
   text-align: left;
+  padding-top: 1em;
 }
 
 input {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(238, 238, 238);
   padding: 0.2em;
-  border: 1px solid black;
+  border: none;
   border-radius: 5px;
   height: 2em;
   box-sizing: border-box;
   font: inherit;
 }
 
-input:focus {
-  /* border: 1px solid black; */
-  /* outline: 2px solid rgba(0, 0, 0, 1); */
-}
-
 #text_input {
   height: 5em;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(238, 238, 238);
 }
 
 .submit-button {
-  background-color: rgb(0, 0, 0);
+  background: rgb(146, 97, 179);
+  background: linear-gradient(
+    144deg,
+    rgba(146, 97, 179, 1) 0%,
+    rgba(255, 101, 101, 1) 100%
+  );
   color: white;
   height: 2.5em;
   margin: 1em 0em 0em;
 }
 
 .submit-button:hover {
-  background-color: rgb(92, 92, 92);
+  background: rgb(146, 97, 179);
+  background: linear-gradient(
+    90deg,
+    rgba(146, 97, 179, 1) 15%,
+    rgba(255, 101, 101, 1) 100%
+  );
+  cursor: pointer;
   color: white;
 }
 
 .button-add {
-  background-color: black;
+  background: rgb(146, 97, 179);
+  background: linear-gradient(
+    144deg,
+    rgba(146, 97, 179, 1) 0%,
+    rgba(255, 101, 101, 1) 100%
+  );
+
   color: white;
   border: 0px;
   border-radius: 2em;
 }
 
 .button-add:hover {
-  background-color: rgb(92, 92, 92);
+  background: rgb(146, 97, 179);
+  background: linear-gradient(
+    90deg,
+    rgba(146, 97, 179, 1) 15%,
+    rgba(255, 101, 101, 1) 100%
+  );
 }
 
 /* Styling för x-knapp vilket stänger ett window */
@@ -263,6 +289,7 @@ input:focus {
 }
 
 .search-bar {
+  background-color: white;
   border: none;
   border-radius: 1.5em;
   padding: 0.7em 1em;
@@ -295,9 +322,12 @@ header {
 }
 
 .user-icon {
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(255, 255, 255);
   padding: 1em;
   border-radius: 3em;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 }
 
 .user-icon:hover {
@@ -305,4 +335,57 @@ header {
   padding: 1em;
   border-radius: 3em;
   cursor: pointer;
+}
+
+/* .user-card {
+  background-color: hotpink;
+  position: absolute;
+  top: 80px;
+  padding: 2em;
+  margin: 5em;
+} */
+
+/* TEST TEST TEST TEST TEST */
+
+.header-right {
+  position: relative;
+}
+
+.user-card {
+  position: absolute;
+  margin-right: 0px;
+  margin-top: 60px;
+  top: 0px;
+  right: 0px;
+  width: 200px;
+  padding: 10px;
+  border-radius: 1em;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  z-index: 2;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0px;
+  list-style: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.small-icon {
+  padding-right: 10px;
+}
+
+.small-link-text {
+  margin-bottom: 0;
+  text-decoration: underline;
+}
+
+.user-card li {
+  display: flex;
+  align-items: center;
+  padding: 5px;
 }

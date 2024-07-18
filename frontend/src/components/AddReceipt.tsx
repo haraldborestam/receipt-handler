@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import DeleteIcon from "/delete-icon.svg";
 import loadingGif from "/loading.gif";
+import UploadIcon from "/upload-icon.svg";
 
 type ReceiptType = {
   id: number;
@@ -130,7 +131,10 @@ function AddReceipt({ onAddReceipt, hideWindow }: AddReceiptProps) {
               <img src={preview} alt="Image preview" />
             </div>
           ) : (
-            <p>Drag 'n' drop an image here, or click to select one</p>
+            <>
+              <img src={UploadIcon} />
+              <p>Drag 'n' drop an image here, or click to select one</p>
+            </>
           )}
         </div>
         <label htmlFor="company">Purchased from</label>
