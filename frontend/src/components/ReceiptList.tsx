@@ -18,6 +18,7 @@ type Props = {
   handleViewReceipt: (receipt: ReceiptType) => void;
   activeReceipt: number;
   handleActiveReceipt: (receiptId: number) => void;
+  addReceipt: () => void;
 };
 
 function ReceiptsList({
@@ -26,6 +27,7 @@ function ReceiptsList({
   handleViewReceipt,
   activeReceipt,
   handleActiveReceipt,
+  addReceipt,
 }: Props) {
   const [error, setError] = useState<Error | null>(null);
   //const [activeReceipt, setActiveReceipt] = useState();
@@ -59,7 +61,11 @@ function ReceiptsList({
             <th>Company</th>
             <th className="text-right">Total</th>
             <th>Date</th>
-            <th className="text-center"></th>
+            <th className="text-center">
+              <button className="button-add" onClick={() => addReceipt()}>
+                Add receipt
+              </button>
+            </th>
           </tr>
         </thead>
         <tbody>

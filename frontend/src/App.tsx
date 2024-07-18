@@ -21,9 +21,8 @@ function App() {
   const [showViewReceiptWindow, setShowViewReceiptWindow] = useState(false);
   // Den här är för att sätta ett (1) enskilt receipt som ska granskas i komponenten ViewReceipt
   const [receiptToBeViewed, setReceiptToBeViewed] = useState<ReceiptType>();
-
-  // NEW FEATURE: ska markera aktivtKvitto i tabellen
-  const [activeReceipt, setActiveReceipt] = useState();
+  // Den här markerar kvitto i tabellen som är aktiverat, dvs visas i ViewReceipt.tsx
+  const [activeReceipt, setActiveReceipt] = useState<number>();
 
   // -------------------------------------------------------------------------------------
   // Fetch receipts on mount
@@ -99,6 +98,14 @@ function App() {
     setActiveReceipt(receiptId);
   }
   // -------------------------------------------------------------------------------------
+  // Funktion som körs när knappen "Add receipt" klickas.
+  // Den skickas till ReceiptsList.tsx som en prop eftersom vi nu har knappen i tabellen.
+  function addReceipt() {
+    setShowAddReceiptWindow(!showAddReceiptWindow);
+    setShowViewReceiptWindow(false);
+    setActiveReceipt(-1);
+  }
+
   return (
     <>
       <div className="mega-container">
@@ -129,6 +136,7 @@ function App() {
             handleViewReceipt={handleViewReceipt}
             activeReceipt={activeReceipt}
             handleActiveReceipt={handleActiveReceipt}
+            addReceipt={addReceipt}
           />
         </div>
         <div className="second-container">
