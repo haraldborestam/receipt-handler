@@ -35,6 +35,7 @@ body {
   border: none;
   padding: 0px;
   margin: 0px;
+  cursor: pointer;
 }
 
 /* Style from old index.css */
@@ -140,6 +141,10 @@ td {
   border-radius: 410x;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
     rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+.view-receipt-section {
+  padding: 2em;
 }
 
 .view-receipt_image {
@@ -268,6 +273,26 @@ input {
     rgba(146, 97, 179, 1) 15%,
     rgba(255, 101, 101, 1) 100%
   );
+}
+
+/* Styling för edit button */
+
+.edit-button {
+  padding: 0px 0.5em;
+  border-radius: 2em;
+  background-color: rgb(229, 229, 229);
+  font-size: 0.8em;
+  height: 20px;
+}
+
+.edit-button:hover {
+  background-color: rgb(207, 207, 207);
+}
+
+.upper-right-corner {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 /* Styling för x-knapp vilket stänger ett window */

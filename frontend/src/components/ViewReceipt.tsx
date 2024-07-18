@@ -16,21 +16,48 @@ function ViewReceipt({ receipt, hideWindow }: Props) {
           className="delete_icon upper-left-corner"
           onClick={() => hideWindow()}
         />
-        <div className="view-receipt_image">
-          <div className="image-preview">
-            <img
-              src={"http://localhost:8080/api/file/" + receipt.file_url}
-              alt="image of receipt goes here"
-            />
+        <button className="edit-button upper-right-corner">edit</button>
+        <form className="add-receipt-form">
+          <div className="dropzonea">
+            <div className="image-preview">
+              <img
+                src={"http://localhost:8080/api/file/" + receipt.file_url}
+                alt="Image preview"
+              />
+            </div>
           </div>
-        </div>
-        Company: {receipt.company}
-        <br></br>
-        Amount: {receipt.total_amount}
-        <br></br>
-        Date: {receipt.date}
-        <br></br>
-        Text content: {receipt.text_content}
+          <label htmlFor="company">Purchased from</label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            value={receipt.company}
+            readOnly
+          />
+          <label htmlFor="amount">Amount</label>
+          <input
+            type="text"
+            id="amount"
+            name="amount"
+            value={receipt.total_amount}
+            readOnly
+          />
+          <label htmlFor="date">Date</label>
+          <input
+            type="text"
+            id="date"
+            name="date"
+            value={receipt.date}
+            readOnly
+          />
+          <label htmlFor="text_content">Text content</label>
+          <textarea
+            id="text_input"
+            name="text_input"
+            value={receipt.text_content}
+            readOnly
+          />
+        </form>
       </div>
     </>
   );
