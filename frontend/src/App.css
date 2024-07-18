@@ -51,8 +51,9 @@ main {
 }
 
 .active {
-  background-color: rgb(35, 38, 40);
-  color: rgb(232, 232, 234);
+  background-color: rgb(240, 240, 240);
+  /* color: rgb(115, 115, 220); */
+  border-radius: 1em;
 }
 
 /* Style from old app.css */

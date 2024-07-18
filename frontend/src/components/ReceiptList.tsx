@@ -16,11 +16,19 @@ type Props = {
   receipts: ReceiptType[];
   setReceipts: React.Dispatch<React.SetStateAction<ReceiptType[]>>;
   handleViewReceipt: (receipt: ReceiptType) => void;
+  activeReceipt: number;
+  handleActiveReceipt: (receiptId: number) => void;
 };
 
-function ReceiptsList({ receipts, setReceipts, handleViewReceipt }: Props) {
+function ReceiptsList({
+  receipts,
+  setReceipts,
+  handleViewReceipt,
+  activeReceipt,
+  handleActiveReceipt,
+}: Props) {
   const [error, setError] = useState<Error | null>(null);
-  const [activeReceipt, setActiveReceipt] = useState();
+  //const [activeReceipt, setActiveReceipt] = useState();
 
   const deleteReceipt = (id: number) => {
     fetch(`http://localhost:8080/api/${id}`, {
@@ -57,9 +65,15 @@ function ReceiptsList({ receipts, setReceipts, handleViewReceipt }: Props) {
         <tbody>
           {receipts.map((receipt) => (
             <tr
-              onClick={() => handleViewReceipt(receipt)}
+              onClick={() => {
+                handleViewReceipt(receipt);
+                handleActiveReceipt(receipt.id);
+              }}
               key={receipt.id}
-              className="receipt-table_row"
+              className={
+                "receipt-table_row " +
+                (activeReceipt && receipt.id == activeReceipt ? "active" : "")
+              }
             >
               <td>{receipt.company}</td>
               <td className="text-right">{receipt.total_amount}</td>

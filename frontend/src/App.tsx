@@ -21,6 +21,10 @@ function App() {
   const [showViewReceiptWindow, setShowViewReceiptWindow] = useState(false);
   // Den här är för att sätta ett (1) enskilt receipt som ska granskas i komponenten ViewReceipt
   const [receiptToBeViewed, setReceiptToBeViewed] = useState<ReceiptType>();
+
+  // NEW FEATURE: ska markera aktivtKvitto i tabellen
+  const [activeReceipt, setActiveReceipt] = useState();
+
   // -------------------------------------------------------------------------------------
   // Fetch receipts on mount
   useEffect(() => {
@@ -67,6 +71,7 @@ function App() {
   // Skickas till ViewReceipt-komponenten som en Prop så att den kan skapa en stäng-knapp.
   const hideViewReceiptWindow = () => {
     setShowViewReceiptWindow(false);
+    setActiveReceipt(-1);
   };
   // -------------------------------------------------------------------------------------
   // Sökfunktion
@@ -88,6 +93,12 @@ function App() {
     console.log(searchResultReceipts);
   }
   // -------------------------------------------------------------------------------------
+  // Funktion för att sätta activeReceipt.
+  // Den skickas som prop till ReceiptList.tsx.
+  function handleActiveReceipt(receiptId: number) {
+    setActiveReceipt(receiptId);
+  }
+  // -------------------------------------------------------------------------------------
   return (
     <>
       <div className="mega-container">
@@ -97,6 +108,7 @@ function App() {
             onClick={() => {
               setShowAddReceiptWindow(!showAddReceiptWindow);
               setShowViewReceiptWindow(false);
+              setActiveReceipt(-1);
             }}
           >
             Add receipt
@@ -115,6 +127,8 @@ function App() {
             receipts={(query && searchResultReceipts) || receipts}
             setReceipts={setReceipts}
             handleViewReceipt={handleViewReceipt}
+            activeReceipt={activeReceipt}
+            handleActiveReceipt={handleActiveReceipt}
           />
         </div>
         <div className="second-container">
