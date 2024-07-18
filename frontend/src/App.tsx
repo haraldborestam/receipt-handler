@@ -37,8 +37,11 @@ function App() {
   // receipt som då skickas tillbaka hit och som ReceiptsList-komponenten kan ta del av
   // och på så sätt lägga till i sin tabell. Så lite fram och tillbaka helt enkelt.
   const handleAddReceipt = (newReceipt: ReceiptType) => {
-    console.log("Nu körs funktionen handleAddReceipt i App.tsx");
+    console.log(
+      "INFO: Nu körs funktionen handleAddReceipt i App.tsx \nTRIGGER: borde vara att nytt kvitto skapats i AddReceipt.tsx"
+    );
     setReceipts((prevReceipts) => [...prevReceipts, newReceipt]);
+    console.log(newReceipt);
     setShowAddReceiptWindow(false);
   };
   // -------------------------------------------------------------------------------------
@@ -66,7 +69,7 @@ function App() {
     setShowViewReceiptWindow(false);
   };
   // -------------------------------------------------------------------------------------
-  // Här ska vi skapa filter för att filtrera receipt-arrayen för sökning
+  // Sökfunktion
   const [query, setQuery] = useState("");
   const [searchResultReceipts, setSearchResultReceipts] =
     useState<ReceiptType[]>(receipts);
@@ -89,15 +92,6 @@ function App() {
     <>
       <div className="mega-container">
         <div className="first-container">
-          <form onSubmit={searchFunc}>
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search..."
-            />
-            <button type="submit">Search</button>
-          </form>
           <button
             className="button-add"
             onClick={() => {
@@ -107,10 +101,18 @@ function App() {
           >
             Add receipt
           </button>
-
+          <form onSubmit={searchFunc}>
+            <input
+              className="search-bar"
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search..."
+            />
+          </form>
           <ReceiptsList
             personId={1}
-            receipts={searchResultReceipts}
+            receipts={(query && searchResultReceipts) || receipts}
             setReceipts={setReceipts}
             handleViewReceipt={handleViewReceipt}
           />
@@ -122,7 +124,7 @@ function App() {
               hideWindow={hideAddReceiptWindow}
             />
           )}
-          {showViewReceiptWindow && (
+          {showViewReceiptWindow && receiptToBeViewed && (
             <ViewReceipt
               receipt={receiptToBeViewed}
               hideWindow={hideViewReceiptWindow}

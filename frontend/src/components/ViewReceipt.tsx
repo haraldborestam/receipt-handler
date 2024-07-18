@@ -1,10 +1,6 @@
 import { ReceiptType } from "./Types";
 import DeleteIcon from "/delete-icon.svg";
 
-// Den här ska ta emot props för att:
-// - Visa receipt, dvs en receipt-prop
-// - Dölja rutan, dvs en funktion för hideWindow
-
 type Props = {
   receipt: ReceiptType;
   hideWindow: () => void;
@@ -23,7 +19,7 @@ function ViewReceipt({ receipt, hideWindow }: Props) {
         <div className="view-receipt_image">
           <div className="image-preview">
             <img
-              src={"http://localhost:8080/" + receipt.file_url}
+              src={"http://localhost:8080/api/file/" + receipt.file_url}
               alt="image of receipt goes here"
             />
           </div>
