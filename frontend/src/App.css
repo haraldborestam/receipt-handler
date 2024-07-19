@@ -17,7 +17,7 @@ body {
 }
 
 .bin_icon:hover {
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(205, 205, 205);
   cursor: pointer;
 }
 
@@ -75,12 +75,13 @@ td {
 }
 
 .receipt-table_row {
-  border-top: 1px solid rgb(255, 255, 255);
+  border-top: 1px solid #dedede;
 }
 
 .receipt-table_row:hover {
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  /*   border-top: 1px solid rgb(104, 104, 104);
+  border-bottom: 1px solid rgb(103, 103, 103); */
+  background-color: rgb(238, 238, 238);
   cursor: context-menu;
 }
 
