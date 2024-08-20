@@ -33,7 +33,7 @@ function ReceiptsList({
   //const [activeReceipt, setActiveReceipt] = useState();
 
   const deleteReceipt = (id: number) => {
-    fetch(`http://localhost:8080/api/${id}`, {
+    fetch(`http://10.0.5.206:8080/api/${id}`, {
       method: "DELETE",
     })
       .then((response) => {

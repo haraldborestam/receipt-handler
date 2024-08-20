@@ -3,6 +3,7 @@ import { useDropzone } from "react-dropzone";
 import DeleteIcon from "/delete-icon.svg";
 import loadingGif from "/loading.gif";
 import UploadIcon from "/upload-icon.svg";
+import heic2any from "heic2any";
 
 type ReceiptType = {
   id: number;
@@ -53,13 +54,51 @@ function AddReceipt({ onAddReceipt, hideWindow }: AddReceiptProps) {
   const handleImageUpload = async (file: File) => {
     setIsLoading(true);
     const formData = new FormData();
-    formData.append("file", file);
+
+    // ----------------------------------
+    // ------- Convert Heic file --------
+    console.log("FILE TYPE IS: " + file.type);
+    if (file.type === "image/heic") {
+      console.log("HEIC file detected. Commencing conversion process");
+
+      try {
+        // Wait for the HEIC to JPEG conversion
+        const convertedBlob = await heic2any({
+          blob: file,
+          toType: "image/jpeg",
+          quality: 0.2, // should reduce the file size
+        });
+
+        // Create a new File from the Blob
+        const jpegFile = new File(
+          [convertedBlob],
+          file.name.replace(/\.[^/.]+$/, ".jpeg"),
+          {
+            type: "image/jpeg",
+            lastModified: Date.now(),
+          }
+        );
+
+        // We set file because it will be used later when doing submit (i.e. create new receipt)
+        setFile(jpegFile);
+        formData.append("file", jpegFile);
+      } catch (error) {
+        console.error("Conversion to JPEG failed:", error);
+        return; // Stop submission if conversion fails
+      }
+    } else {
+      formData.append("file", file);
+    }
+    // ----------------------------------
 
     try {
-      const response = await fetch("http://localhost:8080/api/textextraction", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "http://10.0.5.206:8080/api/textextraction",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -82,9 +121,42 @@ function AddReceipt({ onAddReceipt, hideWindow }: AddReceiptProps) {
     e.preventDefault();
 
     const formData = new FormData();
+    // if file exists then we append it to formData
     if (file) {
-      formData.append("file", file);
+      if (file.type === "image/heic") {
+        console.log(
+          "yes the filetype is a heic. so we will try to convert it.... :D "
+        );
+
+        try {
+          // Wait for the HEIC to JPEG conversion
+          const convertedBlob = await heic2any({
+            blob: file,
+            toType: "image/jpeg",
+          });
+
+          // Create a new File from the Blob
+          const jpegFile = new File(
+            [convertedBlob],
+            file.name.replace(/\.[^/.]+$/, ".jpeg"),
+            {
+              type: "image/jpeg",
+              lastModified: Date.now(),
+            }
+          );
+
+          // Append the JPEG file to the FormData
+          console.log("--- --- heic image converted and appends now --- ---");
+          formData.append("file", jpegFile);
+        } catch (error) {
+          console.error("Conversion to JPEG failed:", error);
+          return; // Stop submission if conversion fails
+        }
+      } else {
+        formData.append("file", file);
+      }
     }
+    console.log("pom baw nu skickar vi till servern");
     formData.append("company", company);
     formData.append("total_amount", total_amount);
     formData.append("date", date);
@@ -92,7 +164,7 @@ function AddReceipt({ onAddReceipt, hideWindow }: AddReceiptProps) {
     formData.append("person", "hardcoded.user@jwt.com");
 
     try {
-      const response = await fetch("http://localhost:8080/api/create", {
+      const response = await fetch("http://10.0.5.206:8080/api/create", {
         method: "POST",
         body: formData,
       });

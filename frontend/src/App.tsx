@@ -28,7 +28,7 @@ function App() {
   // -------------------------------------------------------------------------------------
   // Fetch receipts on mount
   useEffect(() => {
-    fetch(`http://localhost:8080/api/receipt`)
+    fetch(`http://10.0.5.206:8080/api/receipt`)
       .then((response) => response.json())
       .then((data) => {
         setReceipts(data);

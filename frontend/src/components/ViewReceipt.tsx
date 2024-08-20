@@ -21,7 +21,7 @@ function ViewReceipt({ receipt, hideWindow }: Props) {
           <div className="dropzonea">
             <div className="image-preview">
               <img
-                src={"http://localhost:8080/api/file/" + receipt.file_url}
+                src={"http://10.0.5.206:8080/api/file/" + receipt.file_url}
                 alt="Image preview"
               />
             </div>

@@ -36,3 +36,6 @@ build/
 .env.local
 .env
 .data
+.dataOLD
+.dataOLD2
+add_data
